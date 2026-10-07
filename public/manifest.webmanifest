@@ -3,7 +3,7 @@
   "short_name": "Entreclases",
   "description": "Práctica diaria de Lengua de Señas Argentina entre una clase y la otra.",
   "lang": "es-AR",
-  "start_url": "./",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",

@@ -1,5 +1,5 @@
 // Service worker de Entreclases: deja la app disponible sin conexión.
-// El build reemplaza __BUILD_ID__ y __PRECACHE__.
+// El build completa el identificador de versión y la lista de archivos a precargar.
 const CACHE = 'entreclases-__BUILD_ID__';
 const PRECACHE = __PRECACHE__;
 
@@ -57,8 +57,11 @@ async function networkFirst(req, fallbackPath) {
     if (res.ok) {
       const cache = await caches.open(CACHE);
       cache.put(fallbackPath || req, res.clone());
+      return res;
     }
-    return res;
+    // Algunos hosts no sirven el índice de una carpeta (404): se usa la app guardada.
+    const cached = fallbackPath ? await caches.match(fallbackPath) : null;
+    return cached || res;
   } catch (err) {
     const cached = await caches.match(fallbackPath || req);
     if (cached) return cached;
