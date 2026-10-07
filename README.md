@@ -54,7 +54,7 @@ Agregando `?demo` a la dirección se fuerza el modo demo aunque haya Firebase co
 
 Abrí este enlace en el teléfono, con Chrome en Android o Safari en iPhone:
 
-**https://raw.githack.com/Lucho-code/Licit_AR/ccr-f0652fc3-illpha/entreclases/movil/index.html**
+**https://raw.githack.com/Lucho-code/entreclases/main/movil/index.html**
 
 - Es la app completa en **modo demo**: lo que hagas queda guardado solo en ese teléfono.
 - La cámara funciona (espejo y grabación). Cuando el teléfono pida permiso, aceptalo.
@@ -63,7 +63,9 @@ Abrí este enlace en el teléfono, con Chrome en Android o Safari en iPhone:
   - iPhone: botón Compartir → **Agregar a inicio**.
 - Una vez abierta, funciona sin conexión.
 
-La carpeta `movil/` es una copia compilada que publica GitHub a través de raw.githack.com. Se regenera con `npm run build:movil` y se prueba con `npm run test:movil` (emula un Pixel 7). Si el PR se une a `main`, el enlace pasa a usar `main` en lugar del nombre de la rama.
+La carpeta `movil/` es una copia compilada que publica GitHub a través de raw.githack.com. Se regenera con `npm run build:movil` y se prueba con `npm run test:movil` (emula un Pixel 7).
+
+Si ese enlace no abre, publicala con GitHub Pages: en el repo, **Settings → Pages**, origen **Deploy from a branch**, rama `main`, carpeta `/ (root)`. A los pocos minutos queda en `https://lucho-code.github.io/entreclases/movil/`.
 
 ---
 
@@ -72,6 +74,7 @@ La carpeta `movil/` es una copia compilada que publica GitHub a través de raw.g
 Requisitos: [Node.js](https://nodejs.org) 20 o más reciente.
 
 ```bash
+git clone https://github.com/Lucho-code/entreclases.git
 cd entreclases
 npm install
 npm run build
@@ -84,7 +87,7 @@ Para usar la cámara desde el celular, la app tiene que estar publicada con `htt
 
 ## Poner en marcha el piloto real (Firebase)
 
-1. **Crear un proyecto nuevo** en <https://console.firebase.google.com>. Usá uno propio de Entreclases, no el de Licit_AR, para que las reglas de seguridad no se pisen.
+1. **Crear un proyecto nuevo** en <https://console.firebase.google.com>. Usá uno exclusivo para Entreclases: las reglas de seguridad valen para todo el proyecto y pisarían las de otra app.
 2. **Authentication → Sign-in method**: habilitá **Google** y **Anónimo**.
 3. **Firestore Database → Crear base de datos**, en modo producción y en una región de Sudamérica (por ejemplo `southamerica-east1`).
 4. **Storage → Comenzar**, en la misma región.
@@ -159,8 +162,10 @@ entreclases/
 │  ├─ media/               cámara, grabación (MediaRecorder) y lectura de videos
 │  └─ ui/                  pantallas (Preact + htm, sin paso de JSX)
 ├─ firebase/               reglas de Firestore y Storage, índices
+├─ movil/                  versión compilada para probar en el celular (modo demo)
+├─ scripts/                servidor local, videos de muestra e íconos
 ├─ test/unit · test/rules · test/e2e
-└─ build.mjs               esbuild: dist/ (app) y dist-preview/ (vista previa de un solo archivo)
+└─ build.mjs               esbuild: dist/ (app), movil/ (celular) y dist-preview/ (vista previa de un solo archivo)
 ```
 
 | Comando | Qué hace |
